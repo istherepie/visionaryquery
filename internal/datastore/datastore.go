@@ -58,7 +58,7 @@ func New(connection string) (vs VisionaryStore, err error) {
 		CTX: context.Background(),
 	}
 
-	db, err := sql.Open("sqlserver", connection)
+	db, err := sql.Open("mssql", connection)
 
 	if err != nil {
 		return
