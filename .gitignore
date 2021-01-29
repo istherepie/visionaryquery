@@ -5,6 +5,8 @@
 .idea
 .vscode
 .notes
+build
 
 # misc
 *.log
+*.tar.gz
