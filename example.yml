@@ -1,0 +1,9 @@
+Studio: Studio1
+Dataset: DUB
+
+host: db-sql
+database: C5_mads_visma
+user: TC_Read
+pass: supersecretpassword
+schema: dbo
+Table: v_TimeCode
