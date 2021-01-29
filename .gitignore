@@ -1,0 +1,10 @@
+# macos
+.DS_Store
+
+# development
+.idea
+.vscode
+.notes
+
+# misc
+*.log
