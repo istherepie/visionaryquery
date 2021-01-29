@@ -1,9 +1,11 @@
-Studio: Studio1
-Dataset: DUB
+# Studio information
+studio: studio1
+dataset: dub
 
-host: db-sql
-database: C5_mads_visma
-user: TC_Read
+# SQL server
+host: sql.dbserver.local
+database: db_visionary
+user: user_with_read_priv
 pass: supersecretpassword
 schema: dbo
-Table: v_TimeCode
+table: v_TimeCode
