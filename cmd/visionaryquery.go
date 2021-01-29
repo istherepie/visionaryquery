@@ -56,6 +56,11 @@ func Run() int {
 	connectionString := cfg.ConnectionURI()
 
 	store, err := datastore.New(connectionString)
+
+	// TODO: The constructor should set the table and schema
+	store.Schema = cfg.Schema
+	store.Table = cfg.Table
+
 	result, err := store.Query(cfg.Dataset, cfg.Studio)
 
 	if err != nil {
