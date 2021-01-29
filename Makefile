@@ -17,8 +17,8 @@ build:
 
 assets:
 	@echo "Copy assets"
-	cp example.yml $(current_dir)/build/config.yml
-	cp README.md $(current_dir)/build/README.md
+	cp example.yml $(current_dir)/build/
+	cp README.md $(current_dir)/build/
 
 bundle: clean build assets
 	tar czf visionaryquery-build_$(commit_hash).tar.gz -C $(current_dir)/build .
