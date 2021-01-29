@@ -48,9 +48,8 @@ func Run() int {
 	flag.Parse()
 
 	if !*timecode && !*actor && !*character {
-		fmt.Println("ERROR - At least 1 result option must be present")
 		flag.Usage()
-		return 1
+		return 0
 	}
 
 	// Connect to DB
@@ -68,16 +67,16 @@ func Run() int {
 	// Success
 	var returnString []string
 
-	if *timecode {
-		returnString = append(returnString, result.TimeCode)
-	}
-
 	if *actor {
 		returnString = append(returnString, result.Actor)
 	}
 
 	if *character {
 		returnString = append(returnString, result.Character)
+	}
+
+	if *timecode {
+		returnString = append(returnString, result.TimeCode)
 	}
 
 	final := strings.Join(returnString[:], ",")
