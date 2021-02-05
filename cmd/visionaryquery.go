@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"strings"
 
 	"visionaryquery/internal/config"
@@ -16,18 +17,40 @@ import (
 func Run() int {
 
 	// GET SYSTEM PATH
-	path, err := os.Executable()
+	exe, err := os.Executable()
 
 	if err != nil {
 		fmt.Println("ERROR - Unable to determine system path")
 		return 1
 	}
 
+	configPath := path.Dir(exe)
+
+	defaultConfigPath := fmt.Sprintf("%v/config.yml", configPath)
+
+	// Parse flag
+	configFile := flag.String("config", defaultConfigPath, "Config file location (unix path)")
+	timecode := flag.Bool("timecode", false, "Result will include timecode")
+	actor := flag.Bool("actor", false, "Result will include actor")
+	character := flag.Bool("character", false, "Result will include character")
+	flag.Parse()
+
+	if !*timecode && !*actor && !*character {
+		flag.Usage()
+		return 0
+	}
+
 	// GET CONFIG FILE
 	// TODO: Perhaps there should be a list of default locations
 	// Example: /usr/local/etc/namespace/config.yml etc.
 
-	fileName := fmt.Sprintf("%v/config.yml", path)
+	var fileName string
+
+	if config.FileExists(*configFile) {
+		fileName = *configFile
+	} else {
+		fileName = defaultConfigPath
+	}
 
 	yamlFile, err := ioutil.ReadFile(fileName)
 
@@ -42,17 +65,6 @@ func Run() int {
 	if err != nil {
 		fmt.Printf("ERROR - parsing configuration file (%s)\n", err)
 		return 1
-	}
-
-	// Parse flag
-	timecode := flag.Bool("timecode", false, "Result will include timecode")
-	actor := flag.Bool("actor", false, "Result will include actor")
-	character := flag.Bool("character", false, "Result will include character")
-	flag.Parse()
-
-	if !*timecode && !*actor && !*character {
-		flag.Usage()
-		return 0
 	}
 
 	// Connect to DB
