@@ -31,7 +31,5 @@ func (c *Config) ConnectionURI() string {
 		RawQuery: query.Encode(),
 	}
 
-	fmt.Println(u.String())
-
 	return u.String()
 }
