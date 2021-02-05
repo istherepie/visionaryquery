@@ -16,7 +16,7 @@ import (
 func Run() int {
 
 	// GET SYSTEM PATH
-	path, err := os.Getwd()
+	path, err := os.Executable()
 
 	if err != nil {
 		fmt.Println("ERROR - Unable to determine system path")
@@ -24,6 +24,9 @@ func Run() int {
 	}
 
 	// GET CONFIG FILE
+	// TODO: Perhaps there should be a list of default locations
+	// Example: /usr/local/etc/namespace/config.yml etc.
+
 	fileName := fmt.Sprintf("%v/config.yml", path)
 
 	yamlFile, err := ioutil.ReadFile(fileName)
