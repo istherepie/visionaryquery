@@ -20,6 +20,10 @@ View the cli options:
 				Result will include actor
 		-character
 				Result will include character
+
+		-config string
+    			Config file location (unix path) (default: ...)
+
 		-timecode
 				Result will include timecode
 
@@ -42,6 +46,20 @@ Get actor and timecode:
 	Torkel Fredly,01:06:26:00
 
 ```
+
+## Configuration
+
+The cli assumes that the `config.yml` file is located relative to the exectuable. 
+
+However it is possible to set a custom path to the file:
+
+```
+	./VisionaryQuery -config /etc/custom/custom.yml
+
+```
+
+This is useful if the config file is either in a seperate location or must have a specific name.
+
 
 
 ## License
